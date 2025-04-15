@@ -1,11 +1,11 @@
 import express, { Express } from 'express'
-import ENV from './configs/env'
+import ENV from '@/configs/env'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 // import rateLimit from 'express-rate-limit'
 import swaggerUi from 'swagger-ui-express'
-import swaggerSpec from './configs/swagger'
+import swaggerSpec from '@/configs/swagger'
 // import checkUploadsFolderExist from '@/utils/checkFolderExist'
 // import CONSTANT from '@/utils/constants'
 
