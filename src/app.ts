@@ -6,8 +6,13 @@ import helmet from 'helmet'
 // import rateLimit from 'express-rate-limit'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './configs/swagger'
+// import checkUploadsFolderExist from '@/utils/checkFolderExist'
+// import CONSTANT from '@/utils/constants'
 
 const app: Express = express()
+
+// Use it if u want to use server side upload file
+// checkUploadsFolderExist([CONSTANT.FOLDER.UPLOAD_DIR])
 
 if (ENV.NODE_ENV === 'dev') {
   app.use(morgan('dev'))

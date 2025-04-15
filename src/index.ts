@@ -1,5 +1,5 @@
 import app from './app'
-import ENV from './configs/env'
+import ENV from '@/configs/env'
 
 app.listen(8888, () => {
   console.log('Server is running at http://localhost:3000')
