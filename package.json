@@ -44,6 +44,7 @@
     "typescript-eslint": "^8.29.1"
   },
   "dependencies": {
+    "@getbrevo/brevo": "2.1.1",
     "cookie-parser": "^1.4.7",
     "cross-env": "^7.0.3",
     "dotenv": "^16.5.0",
