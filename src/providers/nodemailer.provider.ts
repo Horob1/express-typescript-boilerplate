@@ -8,8 +8,8 @@ export const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: ENV.SMTP.SMTP_SENDER, // Địa chỉ email người gửi
-    pass: ENV.SMTP.SMTP_APPPASSWORD // App password của Gmail, với mỗi sender email bạn cần tạo một app password riêng
+    user: ENV.SMTP.SMTP_SENDER,
+    pass: ENV.SMTP.SMTP_APPPASSWORD
   }
 })
 
@@ -71,7 +71,7 @@ export const sendMailLogs = async () => {
     <div style="padding: 20px;">
         <p style="font-size: 16px; margin: 0 0 20px;">Hello <b>Boss</b>,</p>
         <p style="font-size: 16px; margin: 0 0 20px;">
-            The latest log files (API and Error) have been attached to this email. 
+            The latest log files (API and Error) have been attached to this email.
             Please check the information in the files.
         </p>
         <p style="font-size: 16px; margin: 0 0 20px;">
