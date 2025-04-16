@@ -2,7 +2,6 @@
  * Mongoose plugin for adding audit trail fields to a schema
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, Document, Types } from 'mongoose'
 
 export interface IAuditTrailDocument extends Document {

@@ -43,6 +43,7 @@ export default defineConfig([
           endOfLine: 'auto'
         }
       ],
+      'no-explicit-any': 'off',
       'no-useless-catch': 'off',
       'no-console': 'warn',
       'no-extra-boolean-cast': 'off',
@@ -63,7 +64,8 @@ export default defineConfig([
       'comma-dangle': ['warn', 'never'],
       'comma-spacing': 'warn',
       'arrow-spacing': 'warn',
-      '@typescript-eslint/no-unused-vars': 'warn'
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off'
     }
   }
 ])

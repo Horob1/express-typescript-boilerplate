@@ -1,7 +1,13 @@
 import { APIlog, ErrorLog } from '@/configs/logger'
 import { Request, Response, NextFunction } from 'express'
 
-const apiLoggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
+/**
+ * A middleware function for logging API requests.
+ * @param req
+ * @param res
+ * @param next
+ */
+export const apiLoggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const { method, url, ip, headers } = req
 
   const logData = {
@@ -17,8 +23,12 @@ const apiLoggerMiddleware = (req: Request, res: Response, next: NextFunction) =>
   next()
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const errorLogMiddleware = (err: any, req: Request) => {
+/**
+ * A middleware function for logging errors. This function is used in the error middleware.
+ * @param err
+ * @param req
+ */
+export const errorLogMiddleware = (err: Error, req: Request) => {
   const { method, url, ip, headers } = req
   const errorLogData = {
     method,
@@ -31,10 +41,8 @@ const errorLogMiddleware = (err: any, req: Request) => {
   }
   try {
     ErrorLog.error(errorLogData)
-  } catch (error) {
+  } catch (error: any) {
     // eslint-disable-next-line no-console
     console.log('⚡ [LOGGING ERROR]: ' + error)
   }
 }
-
-export { apiLoggerMiddleware, errorLogMiddleware }

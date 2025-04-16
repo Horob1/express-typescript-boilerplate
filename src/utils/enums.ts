@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
-enum EGender {
+export enum EGender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
   OTHER = 'OTHER'
 }
-
-export { EGender }

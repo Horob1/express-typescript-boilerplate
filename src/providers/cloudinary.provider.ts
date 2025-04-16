@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import cloudinary from 'cloudinary'
 import streamifier from 'streamifier'
 import ENV from '@/configs/env'

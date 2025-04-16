@@ -12,6 +12,7 @@ import CONSTANT from '@/utils/constants'
 import cors from 'cors'
 import getCorsOptions from '@/configs/cors'
 import { initSocket } from './configs/socket'
+import router from './routes'
 
 const app: Express = express()
 const server = http.createServer(app)
@@ -27,6 +28,7 @@ app.use(cors(getCorsOptions()))
 if (ENV.NODE_ENV === 'dev') {
   app.use(morgan('dev'))
   app.use(express.urlencoded({ extended: true }))
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 }
 app.use(cookieParser())
 app.use(express.json())
@@ -38,8 +40,16 @@ app.use(
   })
 )
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+app.use('/api', router)
 
+app.use(
+  '/resources',
+  (req, res, next) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+    next()
+  },
+  express.static(CONSTANT.FOLDER.UPLOAD_DIR)
+)
 // app.use(
 //   rateLimit({
 //     windowMs: 15 * 60 * 1000,

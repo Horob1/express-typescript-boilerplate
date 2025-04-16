@@ -4,18 +4,18 @@ import ENV from './env'
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Rasa Chatbot API',
+    title: `${ENV.PROJECT_NAME} API`,
     version: '1.0.0',
-    description: 'This is the API documentation for Rasa Chatbot API.',
+    description: `This is the API documentation for ${ENV.PROJECT_NAME}.`,
     license: {
       name: 'MIT',
       url: 'https://opensource.org/licenses/MIT'
     },
-    author: 'Nguyen The Anh (Horob1)'
+    author: 'Nguyen The Anh (Horob1) <github.com/Horob1>'
   },
   servers: [
     {
-      url: ENV.BASE_URL
+      url: ENV.BASE_URL as string
     }
   ],
   components: {
@@ -36,7 +36,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./src/mvc/routes/*.ts', './src/mvc/controllers/*.ts']
+  apis: ['./src/routes/*.ts', './src/routes/*/*.ts', './src/types/*.ts']
 }
 
 const swaggerSpec = swaggerJSDoc(options)

@@ -5,6 +5,13 @@ import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { errorLogMiddleware } from './logger.middleware'
 
+/**
+ * A middleware function for handling errors.
+ * @param err
+ * @param req
+ * @param res
+ * @param next
+ */
 // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 export default function errorMiddleware(err: Error, req: Request, res: Response, next: NextFunction) {
   // eslint-disable-next-line no-console

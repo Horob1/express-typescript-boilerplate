@@ -3,8 +3,9 @@ import dotenv from 'dotenv'
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
 const ENV = {
-  NODE_ENV: process.env.NODE_ENV,
-  PORT: process.env.PORT,
+  NODE_ENV: process.env.NODE_ENV || 'dev',
+  PROJECT_NAME: process.env.PROJECT_NAME,
+  PORT: process.env.PORT || 8888,
   BASE_URL: process.env.BASE_URL,
   CORS_ORIGIN: (process.env.CORS_ORIGIN || '').split(','),
   DATABASE_URL: process.env.DATABASE_URL,
@@ -29,6 +30,14 @@ const ENV = {
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET
+  },
+  REDIS: {
+    REDIS_HOST: process.env.REDIS_HOST,
+    REDIS_PORT: Number(process.env.REDIS_PORT || 6379)
+  },
+  OTP: {
+    OTP_VERIFICATION_EMAIL_EXPIRATION: process.env.OTP_VERIFICATION_EMAIL_EXPIRATION,
+    OTP_PASSWORD_RESET_EXPIRATION: process.env.OTP_PASSWORD_RESET_EXPIRATION
   }
 } as const
 

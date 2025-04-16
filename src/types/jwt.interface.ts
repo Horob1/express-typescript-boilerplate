@@ -1,12 +1,10 @@
 import { JwtPayload } from 'jsonwebtoken'
 
-interface IToken {
+export interface IToken {
   _id: string
   email: string
 }
 
-interface IATPayload extends JwtPayload, IToken {}
+export interface IATPayload extends JwtPayload, IToken {}
 
-interface IRTPayload extends JwtPayload, IToken {}
-
-export { IATPayload, IRTPayload, IToken }
+export interface IRTPayload extends JwtPayload, IToken {}

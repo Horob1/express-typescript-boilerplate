@@ -1,4 +1,4 @@
-interface ISuccessResponse<T> {
+export interface ISuccessResponse<T> {
   success: boolean
   data: T
   message: string
@@ -11,17 +11,15 @@ interface IMeta {
   totalPages: number
 }
 
-interface IPaginatedResponse<T> {
+export interface IPaginatedResponse<T> {
   success: boolean
   meta: IMeta
   data: T[]
   message: string
 }
 
-interface IErrorResponse {
+export interface IErrorResponse {
   success: boolean
   message: string
   details?: string
 }
-
-export { ISuccessResponse, IPaginatedResponse, IErrorResponse }

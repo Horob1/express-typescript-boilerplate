@@ -10,7 +10,7 @@ import { StatusCodes } from 'http-status-codes'
  * @param payload implements interface IToken
  * @returns Promise<string>
  */
-const signAccessToken = (payload: IToken) =>
+export const signAccessToken = (payload: IToken) =>
   new Promise<string>((resolve, reject) => {
     jwt.sign(
       payload,
@@ -31,7 +31,7 @@ const signAccessToken = (payload: IToken) =>
  * @param payload implements interface IToken
  * @returns Promise<string>
  */
-const signRefreshToken = (payload: IToken, exp?: number) => {
+export const signRefreshToken = (payload: IToken, exp?: number) => {
   if (exp) {
     return new Promise<string>((resolve, reject) => {
       jwt.sign({ ...payload, exp }, ENV.JWT.JWT_SECRETS_RT as string, (err: Error | null, token: string | undefined) => {
@@ -60,7 +60,7 @@ const signRefreshToken = (payload: IToken, exp?: number) => {
  * @param token string
  * @returns Promise<IRTPayload>
  */
-const verifyRefreshToken = async (token: string) => {
+export const verifyRefreshToken = async (token: string) => {
   return new Promise<IRTPayload>((resolve, reject) => {
     jwt.verify(token, ENV.JWT.JWT_SECRETS_RT as string, (err, payload) => {
       if (err) reject(new HttpError(StatusCodes.UNAUTHORIZED, err.message))
@@ -74,7 +74,7 @@ const verifyRefreshToken = async (token: string) => {
  * @param token string
  * @returns Promise<IRTPayload>
  */
-const verifyAccessToken = async (token: string) => {
+export const verifyAccessToken = async (token: string) => {
   return new Promise<IRTPayload>((resolve, reject) => {
     jwt.verify(token, ENV.JWT.JWT_SECRETS_AT as string, (err, payload) => {
       if (err) reject(new HttpError(StatusCodes.UNAUTHORIZED, err.message === 'jwt expired' ? 'Access token expired' : err.message))
@@ -82,5 +82,3 @@ const verifyAccessToken = async (token: string) => {
     })
   })
 }
-
-export { signAccessToken, signRefreshToken, verifyRefreshToken, verifyAccessToken }

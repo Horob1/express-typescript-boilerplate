@@ -15,6 +15,7 @@ export const initSocket = (server: HttpServer) => {
     const userId = socket.handshake.query.userId as string
     if (!userId) return
     OnlineUsers.set(userId, socket.id)
+    socket.join([userId])
     socket.on('disconnect', () => {
       OnlineUsers.delete(userId)
     })

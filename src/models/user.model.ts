@@ -35,8 +35,6 @@ const userSchema = new Schema<IUser>(
 
 userSchema.plugin(withAuditTrailPlugin)
 
-userSchema.index({ username: 1 })
-userSchema.index({ email: 1 })
 userSchema.index({ username: 1, email: 1 })
 
 export default model<IUser>('Users', userSchema)
