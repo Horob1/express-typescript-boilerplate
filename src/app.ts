@@ -1,3 +1,4 @@
+import http from 'http'
 import express, { Express } from 'express'
 import ENV from '@/configs/env'
 import morgan from 'morgan'
@@ -6,14 +7,23 @@ import helmet from 'helmet'
 // import rateLimit from 'express-rate-limit'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from '@/configs/swagger'
-// import checkUploadsFolderExist from '@/utils/checkFolderExist'
-// import CONSTANT from '@/utils/constants'
+import checkUploadsFolderExist from '@/utils/checkFolderExist'
+import CONSTANT from '@/utils/constants'
+import cors from 'cors'
+import getCorsOptions from '@/configs/cors'
+import { initSocket } from './configs/socket'
 
 const app: Express = express()
-
+const server = http.createServer(app)
 // Use it if u want to use server side upload file
-// checkUploadsFolderExist([CONSTANT.FOLDER.UPLOAD_DIR])
+checkUploadsFolderExist([
+  // CONSTANT.FOLDER.UPLOAD_DIR,
+  CONSTANT.FOLDER.LOGS_DIR,
+  CONSTANT.FOLDER.API_LOGS_DIR,
+  CONSTANT.FOLDER.ERROR_LOGS_DIR
+])
 
+app.use(cors(getCorsOptions()))
 if (ENV.NODE_ENV === 'dev') {
   app.use(morgan('dev'))
   app.use(express.urlencoded({ extended: true }))
@@ -27,6 +37,7 @@ app.use(
     referrerPolicy: { policy: 'no-referrer' }
   })
 )
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 // app.use(
@@ -37,4 +48,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 //     legacyHeaders: false
 //   })
 // )
-export default app
+
+initSocket(server)
+
+export default server

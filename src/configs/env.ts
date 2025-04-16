@@ -6,6 +6,8 @@ const ENV = {
   NODE_ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   BASE_URL: process.env.BASE_URL,
+  CORS_ORIGIN: (process.env.CORS_ORIGIN || '').split(','),
+  DATABASE_URL: process.env.DATABASE_URL,
   JWT: {
     JWT_SECRETS_AT: process.env.JWT_SECRETS_AT,
     JWT_SECRETS_RT: process.env.JWT_SECRETS_RT,

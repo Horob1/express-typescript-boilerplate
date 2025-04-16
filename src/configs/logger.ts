@@ -33,7 +33,7 @@ export const APIlog = winston.createLogger({
 })
 
 // Logger dành cho log lỗi
-export const errorLog = winston.createLogger({
+export const ErrorLog = winston.createLogger({
   level: 'error', // Chỉ ghi log từ cấp độ error trở lên
   format: format.combine(
     addErrorIndex(),

@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, Document, Types } from 'mongoose'
 
-export interface AuditTrailDocument extends Document {
+export interface IAuditTrailDocument extends Document {
   // Soft Delete
   deleted: boolean
   deletedAt: Date | null
@@ -13,7 +13,8 @@ export interface AuditTrailDocument extends Document {
   // eslint-disable-next-line no-unused-vars
   softDelete: (options?: { context?: { userId?: Types.ObjectId } }) => Promise<void>
   restore: () => Promise<void>
-
+  updatedAt: Date
+  createdAt: Date
   // BlameBy
   createdBy: Types.ObjectId
   updatedBy?: Types.ObjectId

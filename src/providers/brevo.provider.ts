@@ -6,14 +6,14 @@ import ENV from '@/configs/env'
 
 let apiInstance = new brevo.TransactionalEmailsApi()
 let apiKey = apiInstance.authentications['apiKey']
-apiKey.apiKey = ENV.BREVO_API_KEY
+apiKey.apiKey = ENV.BREVO.BREVO_API_KEY
 
 const sendEmail = async (recipientEmail: string, customSubject: string, customHtmlContent: string) => {
   // Khởi tạo một cái sendSmtpEmail để tí config với những thông tin cần thiết
   let sendSmtpEmail = new brevo.SendSmtpEmail()
 
   // Tài khoản gửi mail: lưu ý địa chỉ admin email phải là cái email mà các bạn tạo tài khoản trên Brevo
-  sendSmtpEmail.sender = { email: ENV.ADMIN_EMAIL_ADDRESS, name: ENV.ADMIN_EMAIL_NAME }
+  sendSmtpEmail.sender = { email: ENV.BREVO.ADMIN_EMAIL_ADDRESS, name: ENV.BREVO.ADMIN_EMAIL_NAME }
 
   // Những tài khoản nhận email
   // 'to' phải là một Array để sau chúng ta có thể tùy biến gửi 1 email tới nhiều user tùy tính năng dự án nhé
