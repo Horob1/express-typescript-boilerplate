@@ -4,6 +4,7 @@ import nodemailer from 'nodemailer'
 import pug from 'pug'
 import ENV from '@/configs/env'
 import CONSTANT from '@/utils/constants'
+import { send } from 'process'
 
 export const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -60,7 +61,8 @@ export const sendMailLogs = async () => {
 
       const templatePath = path.join(CONSTANT.FOLDER.TEMPLATE_DIR, 'mails/log-email.pug')
       const htmlContent = pug.renderFile(templatePath, {
-        recipient: 'Boss'
+        recipient: 'Boss',
+        sender: ENV.SMTP.SMTP_LOGSENDER
       })
 
       const mailOptions = {
@@ -76,5 +78,27 @@ export const sendMailLogs = async () => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('⚡ [Email Service] Error sending email logs:', error)
+  }
+}
+
+export const sendOtpEmail = async (email: string, otp: string) => {
+  try {
+    const templatePath = path.join(CONSTANT.FOLDER.TEMPLATE_DIR, 'mails/otp-email.pug')
+    const htmlContent = pug.renderFile(templatePath, {
+      appName: 'Ten ung dung',
+      otp: otp
+    })
+
+    const mailOptions = {
+      from: ENV.SMTP.SMTP_SENDER,
+      to: email,
+      subject: 'Your OTP Code',
+      html: htmlContent
+    }
+
+    await transporter.sendMail(mailOptions)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('⚡ [Email Service] Error sending OTP email:', error)
   }
 }

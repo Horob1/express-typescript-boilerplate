@@ -19,7 +19,8 @@ const ENV = {
     SMTP_SENDER: process.env.SMTP_SENDER,
     SMTP_APPPASSWORD: process.env.SMTP_APPPASSWORD,
     SMTP_HOST: process.env.SMTP_HOST,
-    SMTP_ADMINEMAIL: process.env.ADMIN_EMAIL
+    SMTP_ADMINEMAIL: process.env.ADMIN_EMAIL,
+    SMTP_LOGSENDER: process.env.LOG_SENDER
   },
   BREVO: {
     BREVO_API_KEY: process.env.BREVO_API_KEY,
