@@ -1,26 +1,28 @@
 import ENV from '@/configs/env'
 import HttpError from '@/utils/httpError'
 import { errorResponse } from '@/utils/response'
-import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { errorLogMiddleware } from './logger.middleware'
+import MESSAGE from '@/utils/messages'
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
 
-/**
- * A middleware function for handling errors.
- * @param err
- * @param req
- * @param res
- * @param next
- */
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-export default function errorMiddleware(err: Error, req: Request, res: Response, next: NextFunction) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+const errorMiddleware: ErrorRequestHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-next-line no-console
-  if (ENV.NODE_ENV === 'dev') console.log(err)
+  if (ENV.NODE_ENV === 'dev') console.log('⚡ [ERROR]: ', err)
 
   errorLogMiddleware(err, req)
 
   if (err instanceof HttpError) {
-    return res.status(err.statusCode).json(errorResponse(err.message, ENV.NODE_ENV === 'dev' ? err.stack : undefined))
+    res.status(err.statusCode).json(errorResponse(err.message, ENV.NODE_ENV === 'dev' ? err.stack : undefined))
+    return
   }
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse(err.message, ENV.NODE_ENV === 'dev' ? err.stack : undefined))
+
+  let code = StatusCodes.INTERNAL_SERVER_ERROR
+  if (err?.message?.contains('E11000')) code = StatusCodes.CONFLICT
+  else if (err?.message?.contains('validation')) code = StatusCodes.UNPROCESSABLE_ENTITY
+
+  res.status(code).json(errorResponse(err.message || MESSAGE.MIDDLEWARE.INTERNAL_SERVER_ERROR, ENV.NODE_ENV === 'dev' ? err.stack : undefined))
 }
+
+export default errorMiddleware

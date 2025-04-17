@@ -4,7 +4,6 @@ import nodemailer from 'nodemailer'
 import pug from 'pug'
 import ENV from '@/configs/env'
 import CONSTANT from '@/utils/constants'
-import { send } from 'process'
 
 export const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -81,18 +80,18 @@ export const sendMailLogs = async () => {
   }
 }
 
-export const sendOtpEmail = async (email: string, otp: string) => {
+export const sendOtpEmail = async (email: string, otp: string, subject: string) => {
   try {
     const templatePath = path.join(CONSTANT.FOLDER.TEMPLATE_DIR, 'mails/otp-email.pug')
     const htmlContent = pug.renderFile(templatePath, {
-      appName: 'Ten ung dung',
+      appName: ENV.PROJECT_NAME,
       otp: otp
     })
 
     const mailOptions = {
       from: ENV.SMTP.SMTP_SENDER,
       to: email,
-      subject: 'Your OTP Code',
+      subject: subject,
       html: htmlContent
     }
 

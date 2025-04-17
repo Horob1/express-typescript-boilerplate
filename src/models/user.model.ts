@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser>(
 
     // role: { type: String, required: true, default: 'user' },
 
-    avatar: { type: String, default: null }
+    avatar: { type: String, default: '' }
   },
   {
     timestamps: true

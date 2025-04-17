@@ -11,8 +11,9 @@ import checkUploadsFolderExist from '@/utils/checkFolderExist'
 import CONSTANT from '@/utils/constants'
 import cors from 'cors'
 import getCorsOptions from '@/configs/cors'
-import { initSocket } from './configs/socket'
-import router from './routes'
+import { initSocket } from '@/configs/socket'
+import router from '@/routes'
+import errorMiddleware from '@/middlewares/error.middleware'
 
 const app: Express = express()
 const server = http.createServer(app)
@@ -40,16 +41,6 @@ app.use(
   })
 )
 
-app.use('/api', router)
-
-app.use(
-  '/resources',
-  (req, res, next) => {
-    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
-    next()
-  },
-  express.static(CONSTANT.FOLDER.UPLOAD_DIR)
-)
 // app.use(
 //   rateLimit({
 //     windowMs: 15 * 60 * 1000,
@@ -59,6 +50,16 @@ app.use(
 //   })
 // )
 
+app.use('/api', router)
+app.use(errorMiddleware)
+app.use(
+  '/resources',
+  (req, res, next) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+    next()
+  },
+  express.static(CONSTANT.FOLDER.UPLOAD_DIR)
+)
 initSocket(server)
 
 export default server

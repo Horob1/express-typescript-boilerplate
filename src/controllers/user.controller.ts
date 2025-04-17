@@ -6,7 +6,7 @@ import * as userService from '@/services/user.service'
 
 export const register = async (req: Request<ParamsDictionary, any, IUserCreate>, res: Response, next: NextFunction) => {
   try {
-    const data = userService.register(req.body)
+    const data = await userService.register(req.body)
     res.status(StatusCodes.CREATED).json(data)
   } catch (error) {
     next(error)

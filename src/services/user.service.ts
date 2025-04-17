@@ -8,13 +8,19 @@ import { genOTP, hashOTP } from '@/utils/otp'
 import ms, { StringValue } from 'ms'
 import ENV from '@/configs/env'
 import { successResponse } from '@/utils/response'
+import { sendOtpEmail } from '@/providers/nodemailer.provider'
 
 export const register = async (data: IUserCreate) => {
   const isExist = await User.findOne({ $or: [{ email: data.email }, { username: data.username }] })
   if (isExist) throw new HttpError(StatusCodes.CONFLICT, MESSAGES.USER.EMAIL_OR_USERNAME_IS_ALREADY_TAKEN)
   const otp = genOTP()
   const [hashedPassword, hashedOTP] = await Promise.all([hashPassword(data.password), hashOTP(otp)])
-  const user = await User.create({ ...data, password: hashedPassword, emailVerificationOtp: hashedOTP, emailVerificationOtpExpires: new Date(Date.now() + ms(ENV.OTP.OTP_VERIFICATION_EMAIL_EXPIRATION as StringValue)) })
-  //send email to user
+  const user = new User({
+    ...data,
+    password: hashedPassword,
+    emailVerificationOtp: hashedOTP,
+    emailVerificationOtpExpires: new Date(Date.now() + ms(ENV.OTP.OTP_VERIFICATION_EMAIL_EXPIRATION as StringValue))
+  })
+  await Promise.all([user.save(), sendOtpEmail(data.email, otp, MESSAGES.USER.SEND_VERIFICATION_EMAIL)])
   return successResponse(user, MESSAGES.USER.USER_REGISTER_SUCCESSFULLY)
 }
