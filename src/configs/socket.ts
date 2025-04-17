@@ -8,7 +8,7 @@ const OnlineUsers = new Map<string, string>()
 
 export const initSocket = (server: HttpServer) => {
   io = new Server(server, {
-    cors: getCorsOptions()
+    cors: getCorsOptions(),
   })
 
   io.on('connection', (socket: Socket) => {

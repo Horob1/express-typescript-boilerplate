@@ -18,10 +18,17 @@ const errorMiddleware: ErrorRequestHandler = (err: any, req: Request, res: Respo
     return
   }
 
+  // Handle other errors
   let code = StatusCodes.INTERNAL_SERVER_ERROR
-  if (err?.message?.contains('E11000')) code = StatusCodes.CONFLICT
-  else if (err?.message?.contains('validation')) code = StatusCodes.UNPROCESSABLE_ENTITY
+  if (typeof err?.message === 'string') {
+    const lowerMessage = err.message.toLowerCase()
 
+    if (err.message.includes('E11000')) {
+      code = StatusCodes.CONFLICT // Trùng key (MongoDB duplicate key error)
+    } else if (lowerMessage.includes('validation')) {
+      code = StatusCodes.UNPROCESSABLE_ENTITY // Lỗi validate
+    }
+  }
   res.status(code).json(errorResponse(err.message || MESSAGE.MIDDLEWARE.INTERNAL_SERVER_ERROR, ENV.NODE_ENV === 'dev' ? err.stack : undefined))
 }
 

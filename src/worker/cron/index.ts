@@ -10,6 +10,6 @@ cron.schedule(
     await sendMailLogs()
   },
   {
-    timezone: 'Asia/Ho_Chi_Minh'
+    timezone: 'Asia/Ho_Chi_Minh',
   }
 )

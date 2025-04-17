@@ -15,7 +15,7 @@ export const apiLoggerMiddleware = (req: Request, res: Response, next: NextFunct
     url,
     ip,
     userAgent: headers['user-agent'],
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   }
 
   APIlog.info(logData) // Ghi log API
@@ -37,7 +37,7 @@ export const errorLogMiddleware = (err: Error, req: Request) => {
     userAgent: headers['user-agent'],
     timestamp: new Date().toISOString(),
     message: err.message,
-    stack: err.stack
+    stack: err.stack,
   }
   try {
     ErrorLog.error(errorLogData)

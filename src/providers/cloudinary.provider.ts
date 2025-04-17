@@ -7,7 +7,7 @@ const cloudinaryV2 = cloudinary.v2 // giống import { v2 as cloudinary } from '
 cloudinaryV2.config({
   cloud_name: ENV.CLOUDINARY.CLOUDINARY_CLOUD_NAME,
   api_key: ENV.CLOUDINARY.CLOUDINARY_API_KEY,
-  api_secret: ENV.CLOUDINARY.CLOUDINARY_API_SECRET
+  api_secret: ENV.CLOUDINARY.CLOUDINARY_API_SECRET,
 })
 
 // Khởi tạo một function để thực hiện upload file lên Cloudinary - upload thông qua streamifier

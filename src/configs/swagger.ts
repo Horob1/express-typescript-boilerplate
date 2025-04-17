@@ -9,34 +9,34 @@ const swaggerDefinition = {
     description: `This is the API documentation for ${ENV.PROJECT_NAME}.`,
     license: {
       name: 'MIT',
-      url: 'https://opensource.org/licenses/MIT'
+      url: 'https://opensource.org/licenses/MIT',
     },
-    author: 'Nguyen The Anh (Horob1) <github.com/Horob1>'
+    author: 'Nguyen The Anh (Horob1) <github.com/Horob1>',
   },
   servers: [
     {
-      url: ENV.BASE_URL as string
-    }
+      url: ENV.BASE_URL as string,
+    },
   ],
   components: {
     securitySchemes: {
       bearerAuth: {
         type: 'http',
         scheme: 'bearer',
-        bearerFormat: 'JWT' // Optional: chỉ để hiển thị đẹp
-      }
-    }
+        bearerFormat: 'JWT', // Optional: chỉ để hiển thị đẹp
+      },
+    },
   },
   security: [
     {
-      bearerAuth: [] // áp dụng mặc định cho toàn bộ API
-    }
-  ]
+      bearerAuth: [], // áp dụng mặc định cho toàn bộ API
+    },
+  ],
 }
 
 const options = {
   swaggerDefinition,
-  apis: ['./src/routes/*.ts', './src/routes/*/*.ts', './src/types/*.ts']
+  apis: ['./src/routes/*.ts', './src/routes/*/*.ts', './src/types/*.ts'],
 }
 
 const swaggerSpec = swaggerJSDoc(options)

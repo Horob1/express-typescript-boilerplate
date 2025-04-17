@@ -27,9 +27,9 @@ export const APIlog = winston.createLogger({
       datePattern: 'YYYY-MM-DD', // Định dạng ngày
       dirname: 'logs/apis', // Thư mục gốc cho logs
       maxFiles: '7d', // Giữ lại log trong 7 ngày
-      level: 'info' // Ghi log cấp info trở lên
-    })
-  ]
+      level: 'info', // Ghi log cấp info trở lên
+    }),
+  ],
 })
 
 // Logger dành cho log lỗi
@@ -46,7 +46,7 @@ export const ErrorLog = winston.createLogger({
       datePattern: 'YYYY-MM-DD', // Định dạng ngày
       dirname: 'logs/errors', // Thư mục con cho log lỗi
       maxFiles: '7d', // Giữ lại log lỗi trong 7 ngày
-      level: 'error' // Ghi log cấp error
-    })
-  ]
+      level: 'error', // Ghi log cấp error
+    }),
+  ],
 })

@@ -7,16 +7,16 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
   {
-    ignores: ['dist/']
+    ignores: ['dist/'],
   },
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
     plugins: { js },
-    extends: ['js/recommended']
+    extends: ['js/recommended'],
   },
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
-    languageOptions: { globals: globals.browser }
+    languageOptions: { globals: globals.browser },
   },
   tseslint.configs.recommended,
   {
@@ -25,8 +25,8 @@ export default defineConfig([
     ...jest.configs['flat/recommended'],
     rules: {
       ...jest.configs['flat/recommended'].rules,
-      'jest/prefer-expect-assertions': 'off'
-    }
+      'jest/prefer-expect-assertions': 'off',
+    },
   },
   eslintPluginPrettierRecommended,
   {
@@ -37,11 +37,11 @@ export default defineConfig([
           printWidth: 300,
           tabWidth: 2,
           singleQuote: true,
-          trailingComma: 'none',
+          trailingComma: 'es5',
           semi: false,
           arrowParens: 'avoid',
-          endOfLine: 'auto'
-        }
+          endOfLine: 'auto',
+        },
       ],
       'no-explicit-any': 'off',
       'no-useless-catch': 'off',
@@ -49,7 +49,7 @@ export default defineConfig([
       'no-extra-boolean-cast': 'off',
       'no-lonely-if': 'warn',
       'no-unused-vars': 'warn',
-      'no-trailing-spaces': 'warn',
+      'no-trailing-spaces': 'off',
       'no-multi-spaces': 'warn',
       'no-multiple-empty-lines': 'warn',
       'space-before-blocks': ['error', 'always'],
@@ -61,11 +61,11 @@ export default defineConfig([
       'linebreak-style': 'off',
       'no-unexpected-multiline': 'warn',
       'keyword-spacing': 'warn',
-      'comma-dangle': ['warn', 'never'],
+      'comma-dangle': 'off',
       'comma-spacing': 'warn',
       'arrow-spacing': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-explicit-any': 'off'
-    }
-  }
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
 ])

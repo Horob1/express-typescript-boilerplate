@@ -37,7 +37,7 @@ const sendEmail = async (recipientEmail: string, customSubject: string, customHt
 }
 
 export const BrevoProvider = {
-  sendEmail
+  sendEmail,
 }
 
 // Cụ thể sử dụng như nào anh em xem trong hàm createNew trong file userService của code hoàn thiện Trello Advanced nhé

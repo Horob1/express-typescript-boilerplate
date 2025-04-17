@@ -42,12 +42,12 @@ export interface IUser extends IAuditTrailDocument {
   dob: Date
   gender: string
 
-  emailVerificationOtp: string
-  emailVerificationOtpExpires: Date
+  emailVerificationOtp: string | null
+  emailVerificationOtpExpires: Date | null
   emailVerified: boolean
 
-  passwordResetOtp: string
-  passwordResetOtpExpires: Date
+  passwordResetOtp: string | null
+  passwordResetOtpExpires: Date | null
 
   // role: string
 
@@ -126,4 +126,66 @@ export interface IUserUpdate {
   address?: string
   dob?: Date
   gender?: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     VerifyEmail:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ *         otp:
+ *           type: string
+ */
+export interface IVerifyEmail {
+  email: string
+  otp: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     ResendEmail:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ */
+export interface IResendEmail {
+  email: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Login:
+ *       type: object
+ *       properties:
+ *         usernameOrEmail:
+ *           type: string
+ *         password:
+ *           type: string
+ */
+export interface ILogin {
+  usernameOrEmail: string
+  password: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Token:
+ *       type: object
+ *       properties:
+ *         token:
+ *           type: string
+ */
+export interface IToken {
+  token: string
 }

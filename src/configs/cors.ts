@@ -5,7 +5,8 @@ const getCorsOptions = (): CorsOptions => {
 
   return {
     origin: allowedOrigins,
-    credentials: true
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Platform'],
   }
 }
 
