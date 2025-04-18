@@ -52,6 +52,9 @@ export const initSocket = (server: HttpServer) => {
             socket: isExist.socket.filter(s => s.id !== socket.id),
             credentialId: isExist.credentialId.filter(id => id !== credentialId),
           })
+          if (isExist.socketId.length === 0) {
+            OnlineUsers.delete(userId)
+          }
         }
         socket.leave(userId)
         socket.leave(credentialId)

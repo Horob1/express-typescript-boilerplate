@@ -179,6 +179,7 @@ export const refreshToken = async (data: IToken, req: Request, res: Response) =>
   return successResponse({ accessToken, refreshToken: req.platform === EPlatform.WEB ? null : refreshToken }, MESSAGES.USER.REFRESH_TOKEN_SUCCESSFULLY)
 }
 
+//TODO: FIX
 export const logout = async (req: Request<ParamsDictionary, any, ICredentialId>, res: Response) => {
   const platfrom = req.platform
   if (platfrom === EPlatform.WEB) {
@@ -266,6 +267,7 @@ export const resetPassword = async (data: IResetPassword) => {
   return successResponse(null, MESSAGES.USER.RESET_PASSWORD_SUCCESSFULLY)
 }
 
+//TODO: FIX
 export const changePassword = async (data: IChangePassword, userId: string) => {
   const user = await User.findOne({ _id: userId })
   if (!user) throw new HttpError(StatusCodes.NOT_FOUND, MESSAGES.USER.USER_NOT_FOUND)

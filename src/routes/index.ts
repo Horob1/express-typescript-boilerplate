@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import v1 from './v1'
-import platformMiddleware from '@/middlewares/platfrom.middleware'
+import platformMiddleware from '@/middlewares/platform.middleware'
 
 const router = Router()
 router.use(platformMiddleware)
