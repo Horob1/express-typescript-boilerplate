@@ -40,14 +40,13 @@ router.post('/register', userController.register)
 //TODO: logout
 //TODO: forgot password
 //TODO: reset password
-//TODO: resend reset password email
 //TODO: change password
 //TODO: update profile
 //TODO: update avatar
 //TODO: get profile
 //TODO: get device logged in list
-//TODO: logout device
-//TODO: check email exist
-//TODO: check username exist
+//TODO: logout device // không cần thiết
+//TODO: check email exist // không cần thiết vì đã check trong register
+//TODO: check username exist // không cần thiết vì đã check trong register
 
 export default router
