@@ -3,7 +3,7 @@ import { IRFToken } from '@/types/rftoken.interface'
 
 const rfTokenSchema = new Schema<IRFToken>(
   {
-    token: { type: String, required: true },
+    token: { type: String, required: true, unique: true },
     userId: { type: Schema.Types.ObjectId, ref: 'Users', required: true },
     ip: { type: String, required: true },
     os: { type: String, default: undefined },
@@ -19,5 +19,6 @@ const rfTokenSchema = new Schema<IRFToken>(
 )
 
 rfTokenSchema.index({ token: 1, userId: 1 })
+rfTokenSchema.index({ userId: 1 })
 
 export default model<IRFToken>('RFTokens', rfTokenSchema)

@@ -13,7 +13,8 @@ export const cachePublic = async (req: Request, res: Response, next: NextFunctio
   try {
     const cachedData = await redisClient.get(cacheKey)
     if (cachedData) {
-      return res.json(JSON.parse(cachedData))
+      res.json(JSON.parse(cachedData))
+      return
     }
     next()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
@@ -28,7 +29,8 @@ export const cachePersonal = async (req: Request, res: Response, next: NextFunct
   try {
     const cachedData = await redisClient.get(cacheKey)
     if (cachedData) {
-      return res.json(JSON.parse(cachedData))
+      res.json(JSON.parse(cachedData))
+      return
     }
     next()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars

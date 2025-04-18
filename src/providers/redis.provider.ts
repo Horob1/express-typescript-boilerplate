@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import redis from 'redis'
+import { createClient } from 'redis'
 import ENV from '@/configs/env'
 
-const client = redis.createClient({
+const client = createClient({
   socket: {
     host: ENV.REDIS.REDIS_HOST,
     port: ENV.REDIS.REDIS_PORT,

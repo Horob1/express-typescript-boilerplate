@@ -149,20 +149,6 @@ export interface IVerifyEmail {
  * @swagger
  * components:
  *   schemas:
- *     ResendEmail:
- *       type: object
- *       properties:
- *         email:
- *           type: string
- */
-export interface IResendEmail {
-  email: string
-}
-
-/**
- * @swagger
- * components:
- *   schemas:
  *     Login:
  *       type: object
  *       properties:
@@ -185,7 +171,123 @@ export interface ILogin {
  *       properties:
  *         token:
  *           type: string
+ *           optional: true
+ *           description: Only for mobile
  */
 export interface IToken {
-  token: string
+  token?: string
+}
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     CredentialId:
+ *       type: object
+ *       properties:
+ *         credentialId:
+ *           type: string
+ *           optional: true
+ *           description: Only for mobile
+ */
+export interface ICredentialId {
+  credentialId?: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Email:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ */
+export interface IEmail {
+  email: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Username:
+ *       type: object
+ *       properties:
+ *         username:
+ *           type: string
+ */
+export interface IUsername {
+  username: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     ResetPassword:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ *         otp:
+ *           type: string
+ *         password:
+ *           type: string
+ */
+export interface IResetPassword {
+  email: string
+  otp: string
+  password: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     ChangePassword:
+ *       type: object
+ *       properties:
+ *         oldPassword:
+ *           type: string
+ *         newPassword:
+ *           type: string
+ *         confirmPassword:
+ *           type: string
+ */
+export interface IChangePassword {
+  oldPassword: string
+  newPassword: string
+  confirmPassword: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Avatar:
+ *       type: object
+ *       properties:
+ *         avatar:
+ *           type: string
+ *           format: binary
+ */
+export interface IAvatar {
+  avatar: string
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Credentials:
+ *       type: object
+ *       properties:
+ *         credentials:
+ *           type: array
+ *           items:
+ *             type: string
+ */
+export interface ICredentials {
+  credentials: string[]
 }
