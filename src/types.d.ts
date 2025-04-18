@@ -1,8 +1,11 @@
 import 'express'
 import { IATPayload } from '@/types/jwt.interface'
-declare module 'express' {
-  export interface Request {
-    user?: IATPayload
-    cacheKey?: string
+declare global {
+  namespace Express {
+    interface Request {
+      user?: IATPayload
+      cacheKey?: string
+      platform: string
+    }
   }
 }

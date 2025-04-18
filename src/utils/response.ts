@@ -9,7 +9,7 @@ export function successResponse<T>(data: T, message: string): ISuccessResponse<T
   return {
     success: true,
     data,
-    message
+    message,
   }
 }
 
@@ -18,7 +18,7 @@ export function errorResponse(message: string, details?: string): IErrorResponse
   return {
     success: false,
     message,
-    details
+    details,
   }
 }
 
@@ -31,8 +31,8 @@ export function paginatedResponse<T>(data: T[], total: number, page: number, lim
       total,
       page,
       limit,
-      totalPages: Math.ceil(total / limit)
+      totalPages: Math.ceil(total / limit),
     },
-    message
+    message,
   }
 }

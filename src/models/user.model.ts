@@ -26,10 +26,10 @@ const userSchema = new Schema<IUser>(
 
     // role: { type: String, required: true, default: 'user' },
 
-    avatar: { type: String, default: '' }
+    avatar: { type: String, default: '' },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 )
 

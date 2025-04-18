@@ -7,16 +7,16 @@ import { Schema, Document, Types } from 'mongoose'
 export interface IAuditTrailDocument extends Document {
   // Soft Delete
   deleted: boolean
-  deletedAt?: Date
-  deletedBy?: Types.ObjectId
+  deletedAt: Date | null
+  deletedBy: Types.ObjectId | null
   // eslint-disable-next-line no-unused-vars
   softDelete: (options?: { context?: { userId?: Types.ObjectId } }) => Promise<void>
   restore: () => Promise<void>
   updatedAt: Date
   createdAt: Date
   // BlameBy
-  createdBy?: Types.ObjectId
-  updatedBy?: Types.ObjectId
+  createdBy: Types.ObjectId | null
+  updatedBy: Types.ObjectId | null
 }
 
 export default function withAuditTrailPlugin<T extends Document>(schema: Schema<T>) {
@@ -27,7 +27,7 @@ export default function withAuditTrailPlugin<T extends Document>(schema: Schema<
     deletedBy: { type: Types.ObjectId, ref: 'User', default: null },
 
     createdBy: { type: Types.ObjectId, ref: 'User', default: null },
-    updatedBy: { type: Types.ObjectId, ref: 'User', default: null }
+    updatedBy: { type: Types.ObjectId, ref: 'User', default: null },
   } as any)
 
   // --- Default exclude deleted docs ---

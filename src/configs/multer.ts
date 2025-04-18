@@ -20,7 +20,7 @@ const imageStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname)
     cb(null, `img-${Date.now()}${ext}`)
-  }
+  },
 })
 
 const imageFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
@@ -33,7 +33,7 @@ export default {
     storage: imageStorage,
     fileFilter: imageFilter,
     limits: {
-      fileSize: CONSTANT.MULTER.IMAGE_SIZE_LIMIT
-    }
-  })
+      fileSize: CONSTANT.MULTER.IMAGE_SIZE_LIMIT,
+    },
+  }),
 }

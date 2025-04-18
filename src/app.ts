@@ -14,6 +14,7 @@ import getCorsOptions from '@/configs/cors'
 import { initSocket } from '@/configs/socket'
 import router from '@/routes'
 import errorMiddleware from '@/middlewares/error.middleware'
+import { setupGlobalErrorHandlers } from '@/configs/setupGlobalErrorHandlers'
 
 const app: Express = express()
 const server = http.createServer(app)
@@ -22,7 +23,7 @@ checkUploadsFolderExist([
   // CONSTANT.FOLDER.UPLOAD_DIR,
   CONSTANT.FOLDER.LOGS_DIR,
   CONSTANT.FOLDER.API_LOGS_DIR,
-  CONSTANT.FOLDER.ERROR_LOGS_DIR
+  CONSTANT.FOLDER.ERROR_LOGS_DIR,
 ])
 
 app.use(cors(getCorsOptions()))
@@ -37,7 +38,7 @@ app.use(
   helmet({
     contentSecurityPolicy: false,
     crossOriginResourcePolicy: { policy: 'same-origin' },
-    referrerPolicy: { policy: 'no-referrer' }
+    referrerPolicy: { policy: 'no-referrer' },
   })
 )
 
@@ -60,6 +61,7 @@ app.use(
   },
   express.static(CONSTANT.FOLDER.UPLOAD_DIR)
 )
+setupGlobalErrorHandlers()
 initSocket(server)
 
 export default server

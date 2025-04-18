@@ -2,5 +2,10 @@
 export enum EGender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER',
+}
+
+export enum EPlatform {
+  WEB = 'WEB',
+  MOBILE = 'MOBILE',
 }

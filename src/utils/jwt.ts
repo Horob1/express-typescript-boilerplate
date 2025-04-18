@@ -1,10 +1,11 @@
+import { sha256 } from '@noble/hashes/sha256'
+import { bytesToHex } from '@noble/hashes/utils'
 import jwt from 'jsonwebtoken'
 import ENV from '@/configs/env'
 import { IRTPayload, IToken } from '@/types/jwt.interface'
 import { StringValue } from 'ms'
 import HttpError from '@/utils/httpError'
 import { StatusCodes } from 'http-status-codes'
-
 /**
  * Sign access token
  * @param payload implements interface IToken
@@ -16,7 +17,7 @@ export const signAccessToken = (payload: IToken) =>
       payload,
       ENV.JWT.JWT_SECRETS_AT as string,
       {
-        expiresIn: ENV.JWT.ACCESS_TOKEN_EXPIRATION as StringValue
+        expiresIn: ENV.JWT.ACCESS_TOKEN_EXPIRATION as StringValue,
       },
       (err, token) => {
         if (err) reject(err)
@@ -45,7 +46,7 @@ export const signRefreshToken = (payload: IToken, exp?: number) => {
         payload,
         ENV.JWT.JWT_SECRETS_RT as string,
         {
-          expiresIn: ENV.JWT.REFRESH_TOKEN_EXPIRATION as StringValue
+          expiresIn: ENV.JWT.REFRESH_TOKEN_EXPIRATION as StringValue,
         },
         (err, token) => {
           if (err) reject(err)
@@ -81,4 +82,14 @@ export const verifyAccessToken = async (token: string) => {
       else resolve(payload as IRTPayload)
     })
   })
+}
+
+/**
+ * Hash refresh token
+ * @param token string
+ * @returns string
+ */
+export function hashToken(token: string): string {
+  const hash = sha256(new TextEncoder().encode(token))
+  return bytesToHex(hash)
 }

@@ -33,9 +33,9 @@ export interface IRFToken extends Document {
   token: string
   userId: Types.ObjectId
   ip: string
-  os: string
-  browser: string
-  device: string
+  os: string | undefined
+  browser: string | undefined
+  device: string | undefined
   userAgent: string
   iat: Date
   exp: Date

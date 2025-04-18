@@ -8,7 +8,7 @@ const checkFolderExist = (folderPath: string[]) => {
   folderPath.map(DIR => {
     if (!fs.existsSync(DIR))
       fs.mkdirSync(DIR, {
-        recursive: true
+        recursive: true,
       })
   })
 }

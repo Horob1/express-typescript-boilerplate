@@ -2,6 +2,7 @@ import { sha256 } from '@noble/hashes/sha256'
 import { utf8ToBytes } from '@noble/hashes/utils'
 import mongoose from 'mongoose'
 import redisClient from '@/providers/redis.provider'
+import CONSTANT from './constants'
 
 /**
  * Func gen cache key
@@ -36,6 +37,15 @@ export const genCacheKey = (url: string, userId?: string) => {
  * @param ttl (minutes)
  * @returns
  */
-export const saveCache = async (key: string, data: unknown, ttl: number = 5) => {
+export const saveCache = async (key: string, data: unknown, ttl: number = CONSTANT.REDIS.DEFAULT_TTL) => {
   await redisClient.set(key, JSON.stringify(data), { EX: 60 * ttl + Math.random() * 180 })
+}
+
+/**
+ * Func delete cache
+ * @param key
+ * @returns
+ */
+export const deleteCache = async (key: string) => {
+  await redisClient.del(key)
 }
